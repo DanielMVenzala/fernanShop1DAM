@@ -5,7 +5,7 @@
 **FernanShop** es una aplicación desarrollada en Java para la asignatura de Programación de 1º de Desarrollo de Aplicaciones Multiplataforma (DAM). En dicha aplicación se gestionará un e-commerce que permitirá el acceso a clientes, trabajadores y administradores, teniendo cada uno de estos perfiles un menú propio con diversas funcionalidades. Estas son: alta de nuevos clientes o trabajores, creación y asignación de nuevos pedidos o consulta y modificación de datos personales. Dispondremos de un menú específico para cada uno de los perfiles al cual se accederá mediante un login.
 
 
-# Cambios implementados respecto en la práctica 4
+# Cambios implementados en la práctica 4
 
 - Cambio 1
 - Cambio 2
