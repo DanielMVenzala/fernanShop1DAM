@@ -11,18 +11,18 @@
 1. Implementar un método en la clase Pedido para generar un idPedido aleatorio entre 0 y 100000
 
 
-![App Screenshot](https://i.postimg.cc/kgdbBFjx/image.png)
+![App Screenshot](https://i.postimg.cc/kgdbBFjx/image.png)  
 
 
 2. Antes de crear un nuevo pedido comprobar que el idPedido que se genera automáticamente al llamar al constructor no exista con anterioridad. Lo haremos con varios condicionales dentro de un bucle do-while hasta que empecemos a trabajar con arrays.
 
 
-![App Screenshot](https://i.postimg.cc/9F141RC9/image.png)
+![App Screenshot](https://i.postimg.cc/9F141RC9/image.png)  
 
 
 3. Cuando un nuevo usuario se registre comprobaremos que el mail introducido no exista previamente. Ahora lo haremos con un if hasta que utilicemos estructuras de datos más avanzadas.
 
-![App Screenshot](https://i.postimg.cc/vHm8YPw1/image.png)
+![App Screenshot](https://i.postimg.cc/vHm8YPw1/image.png)  
 
 
 4. Para la creación de un nuevo cliente así como para la modificación de su correo electrónico implementamos un método que enviará un token al mail del cliente y que tendrá que introducir para poder completar el registro. Dentro del método llamaremos a enviarCorreoGmail, donde se establecen las propiedades de la conexión (remitente, clave, puerto, host...)
