@@ -1,11 +1,7 @@
 package org.example.view;
 
 import org.example.comunicaciones.Comunicaciones;
-import org.example.data.ProductosData;
 import org.example.models.*;
-import org.example.utils.Utils;
-
-import javax.mail.SendFailedException;
 import java.util.Scanner;
 
 import static org.example.comunicaciones.Comunicaciones.enviaMensajeTelegram;
