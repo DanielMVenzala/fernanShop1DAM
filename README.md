@@ -14,3 +14,9 @@
 ![App Screenshot](https://i.postimg.cc/kgdbBFjx/image.png)
 
 
+2. Antes de crear un nuevo pedido comprobar que idPedido que se genera automáticamente al llamar al constructor no exista con anterioridad. Lo haremos con varios condicionales dentro de un bucle do-while hasta que empecemos a trabajar con arrays.
+
+
+![App Screenshot](https://i.postimg.cc/9F141RC9/image.png)
+
+
