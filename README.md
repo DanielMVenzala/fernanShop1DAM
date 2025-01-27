@@ -20,3 +20,7 @@
 ![App Screenshot](https://i.postimg.cc/9F141RC9/image.png)
 
 
+3. Cuando un nuevo usuario se registre comprobaremos que el mail introducido no exista previamente. Ahora lo haremos con un if hasta que utilicemos estructuras de datos más avanzadas.
+
+![App Screenshot](https://i.postimg.cc/vHm8YPw1/image.png)
+
