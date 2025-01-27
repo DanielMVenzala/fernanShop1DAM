@@ -3,6 +3,7 @@ package org.example.view;
 import org.example.comunicaciones.Comunicaciones;
 import org.example.data.ProductosData;
 import org.example.models.*;
+import org.example.utils.Utils;
 
 import javax.mail.SendFailedException;
 import java.util.Scanner;
@@ -14,7 +15,7 @@ import static org.example.utils.Utils.*;
 public class Main {
     // Se declaran las instancias estáticas para poder trabajar con ellas en el main
     static Cliente cliente1 = new Cliente("Juan", "Lafuente", "Calle 1", "Martos", "Jaén", 655874511, "cliente1fernanshop@gmail.com", "jlf123");
-//    static Cliente cliente2 = new Cliente("Pedro", "Conde", "Calle 144", "Jaén", "Jaén", 655441122, "pedroconde@gmail.com", "pecon467");
+//    static Cliente cliente2 = new Cliente("Pedro", "Conde", "Calle 144", "Jaén", "Jaén", 655441122, "cliente2fernanshop@gmail.com", "pecon467");
     static Cliente cliente2 = null;
 
     static Trabajador trabajador1 = new Trabajador("Andrés", "González", "trabajador1fernanshop@gmail.com", "andgon58745");
@@ -25,9 +26,9 @@ public class Main {
     static Admin admin = new Admin("admin@gmail.com", "admin", cliente1, cliente2, trabajador1, trabajador2, trabajador3);
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NumberFormatException{
         Scanner sc = new Scanner(System.in);
-        int op;
+        int op = 0;
 
         do {
             System.out.println("""
@@ -60,7 +61,12 @@ public class Main {
                     4. Salir
                     """);
             System.out.print("Selecciona una opción: ");
-            op = Integer.parseInt(sc.nextLine());
+            try {
+                op = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Introduce una opción correcta");
+            }
+            
 
             /* Cada uno de los perfiles tiene un solo método. Dentro de él se llamarán a los métodos
             menuCliente, menuTrabajador o menuAdmin, que contendrán su correspondiente lógica */
@@ -79,8 +85,6 @@ public class Main {
                 case 4:
                     System.out.println("¡Hasta pronto!");
                     break;
-                default:
-                    System.out.println("Opción incorrecta...");
             }
         } while (op != 4);
     }
@@ -88,8 +92,8 @@ public class Main {
 
 
     // Método que nos permitirá iniciar sesión o bien registrar a un nuevo cliente
-    public static void gestionCliente(Scanner sc) {
-        int op;
+    public static void gestionCliente(Scanner sc) throws NumberFormatException{
+        int op = 0;
 
         System.out.print("""
             \n¿Qué quieres hacer?
@@ -98,7 +102,12 @@ public class Main {
             3. Volver
             Selecciona una opción:
             """);
-        op = Integer.parseInt(sc.nextLine());
+
+        try {
+            op = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Introduce una opción correcta.");
+        }
 
         switch (op) {
             case 1 :
@@ -111,8 +120,6 @@ public class Main {
                 break;
             case 3:
                 break;
-            default:
-                System.out.println("Opción incorrecta.");
         }
     }
 
@@ -205,7 +212,7 @@ public class Main {
         System.out.println("Alta realizada correctamente");
         System.out.println("Un momento por favor...");
 
-        enviaTokenMailCliente(token, cliente.getCorreo());
+        enviaTokenMailCliente(token, cliente.getCorreo(), cliente.getNombre());
 
         int tokenUsuario = 0;
         do {
@@ -219,12 +226,12 @@ public class Main {
 
     }
 
-    public static void enviaTokenMailCliente(int token, String correo) {
+    public static void enviaTokenMailCliente(int token, String correo, String nombreCliente) {
 
         String destinatario = correo;
-        String asunto = "TU TOKEN ES " + token;
-        String cuerpo = "<h1> Esta es una prueba para mandar correos con html desde Java </h1>" +
-                "<p>Hola <strong> Daniel </strong> cómo estás </p>";
+        String asunto = "BIENVENIDO A FERNANSHOP, AQUÍ TIENES TU TOKEN DE BIENVENIDA";
+        String cuerpo = "<img src='https://i.postimg.cc/C1yV7PDS/Captura-de-pantalla-2025-01-16-105520.jpg' alt='Logo' />";
+        cuerpo += "<h2> Estimado " + nombreCliente + " aquí tienes tu token de bienvenida: " + token + "</h2>";
 
         Comunicaciones.enviarCorreoGmail(destinatario, asunto, cuerpo);
 
@@ -253,11 +260,25 @@ public class Main {
     }
 
     public static Pedido creaPedido(Scanner sc, Cliente cliente) {
+        boolean continuar;
         Pedido pedido;
         System.out.println(pintaCatalogo());
         System.out.println();
 
-        pedido = new Pedido(cliente, null);
+        do {
+            pedido = new Pedido(cliente, null);
+
+            if (cliente1 != null) {
+                if (cliente1.getPedido1() != null && cliente1.getPedido1().getIdPedido().equals(pedido.getIdPedido())) continuar = false;
+                else if (cliente1.getPedido2() != null && cliente1.getPedido2().getIdPedido().equals(pedido.getIdPedido())) continuar = false;
+                else continuar = true;
+            } else if (cliente2 != null) {
+                if (cliente2.getPedido1() != null && cliente2.getPedido1().getIdPedido().equals(pedido.getIdPedido())) continuar = false;
+                else if (cliente2.getPedido1() != null && cliente2.getPedido2().getIdPedido().equals(pedido.getIdPedido())) continuar = false;
+                else continuar = true;
+            } else continuar = true;
+        } while (!continuar);
+
 
         for (int i = 1; i <= 3; i++) {
             String productoCarrito;
@@ -344,7 +365,7 @@ public class Main {
 
             pedido.setEstado("En preparación");
             System.out.println("Pedido asignado al repartidor/a " + trabajadorAsignado.getNombre());
-            enviaMensajeTelegram("Tienes un nuevo pedido asignado. Revisa tu correo electrónico");
+            enviaMensajeTelegram("Tienes un nuevo pedido asignado: " + pedido.getIdPedido() + ". Revisa tu correo electrónico");
         } else {
             System.out.println("No hay trabajadores disponibles para asignar el pedido.");
         }
@@ -373,9 +394,9 @@ public class Main {
                 "<br><b>Total pedido: </b>" + pedido.getTotalPedido() + "€" +
                 "<br><br><h1>==================================</h1>";
 
-        String cuerpo = "<img src='https://cdn.discordapp.com/attachments/1330846328212820021/1330846377432973322/" +
-                "Captura_de_pantalla_2025-01-16_105520.jpg?ex=678f76c6&is=678e2546&hm=a6ebe64b9af95886a99e32711a632b" +
-                "533a8e60c531b125be906c88894b2ac778&' alt='Logo' />";
+
+
+        String cuerpo = "<img src='https://i.postimg.cc/C1yV7PDS/Captura-de-pantalla-2025-01-16-105520.jpg' alt='Logo' />";
         cuerpo += "<br><h1> DESGLOSE DE PEDIDO </h1>";
         cuerpo += resultado;
 
@@ -389,7 +410,7 @@ public class Main {
         String asunto = "CONFIRMACIÓN DE PEDIDO " + pedido.getIdPedido() + " PARA " + trabajador.getNombre();
 
         String resultado = "";
-        resultado += "<br><h1>=========== Pedido " + pedido.getIdPedido() + " ===========</h1>" +
+        resultado += "<br><h2>=========== Pedido " + pedido.getIdPedido() + " ===========</h2>" +
                 "<br>" + "<p><b>Estado: </b>" + pedido.getEstado() +
                 "<br><b>Cliente: </b>" + pedido.getCliente().getNombre() + " " + pedido.getCliente().getApellidos() +
                 "<br><b>Dirección: </b>" + pedido.getCliente().getDireccion() +
@@ -405,12 +426,14 @@ public class Main {
                 "<br>" + ((pedido.getProducto2() == null) ? "" : pedido.getProducto2().pintaProducto()) +
                 "<br>" + ((pedido.getProducto3() == null) ? "" : pedido.getProducto3().pintaProducto()) +
                 "<br><b>Total pedido: </b>" + pedido.getTotalPedido() + "€" +
-                "<br><br><h1>==================================</h1>";
+                "<br><br><h2>==================================</h2>";
 
-        String cuerpo = "<img src='https://cdn.discordapp.com/attachments/1330846328212820021/1330846377432973322/" +
-                "Captura_de_pantalla_2025-01-16_105520.jpg?ex=678f76c6&is=678e2546&hm=a6ebe64b9af95886a99e32711a632b" +
-                "533a8e60c531b125be906c88894b2ac778&' alt='Logo' />";
-        cuerpo += "<br><h1> DESGLOSE DE PEDIDO </h1>";
+        /*
+        <a href="https://imgbb.com/"><img src="https://i.ibb.co/TvhJwrB/Captura-de-pantalla-2025-01-16-105520.jpg" alt="Captura-de-pantalla-2025-01-16-105520" border="0"></a>
+         */
+
+        String cuerpo = "<img src='https://i.postimg.cc/C1yV7PDS/Captura-de-pantalla-2025-01-16-105520.jpg' alt='Logo' />";
+        cuerpo += "<br><h2> DESGLOSE DE PEDIDO </h2>";
         cuerpo += resultado;
 
         Comunicaciones.enviarCorreoGmail(destinatario, asunto, cuerpo);
@@ -482,7 +505,7 @@ public class Main {
 
             switch (op) {
                 case 1:
-                    System.out.println(ProductosData.pintaCatalogo());
+                    System.out.println(pintaCatalogo());
                     pulsaParaContinuar();
                     limpiaPantalla();
                     break;
@@ -548,7 +571,7 @@ public class Main {
                     limpiaPantalla();
                     break;
                 case 3:
-                    System.out.println(ProductosData.pintaCatalogo());
+                    System.out.println(pintaCatalogo());
                     pulsaParaContinuar();
                     limpiaPantalla();
                     break;

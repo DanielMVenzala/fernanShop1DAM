@@ -156,7 +156,7 @@ public class Cliente {
                     int token = generaToken();
                     int tokenUsuario;
                     System.out.println("Un momento por favor...");
-                    enviaTokenMailCliente(token, nuevoCorreo);
+                    enviaTokenMailCliente(token, nuevoCorreo, nombre);
                     do {
                         System.out.println("Introduce el token que has recibido al nuevo mail para continuar:");
                         tokenUsuario = Integer.parseInt(sc.nextLine());

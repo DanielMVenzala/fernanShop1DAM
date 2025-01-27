@@ -21,7 +21,7 @@ public class Pedido {
     // El id pedido se autoincrementa con la creación de un nuevo pedido
     public Pedido(Cliente cliente, Producto producto1){
 
-        idPedido = String.valueOf((int) (Math.random() * 100000));
+        idPedido = generaIDPedido();
         estado = "Recibido";
         this.cliente = cliente;
         this.producto1 = producto1;
@@ -52,6 +52,10 @@ public class Pedido {
         comentario = pedido.comentario;
         totalPedido = pedido.totalPedido;
         contadorPedidos = pedido.contadorPedidos;
+    }
+
+    public String generaIDPedido() {
+        return String.valueOf((int) (Math.random() * 100000));
     }
 
     // Método para calcular el número de productos de cada pedido
