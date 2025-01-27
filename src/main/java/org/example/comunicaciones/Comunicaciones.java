@@ -63,6 +63,5 @@ public class Comunicaciones {
         } catch (MessagingException me) {
             me.printStackTrace();
         }
-
     }
 }
