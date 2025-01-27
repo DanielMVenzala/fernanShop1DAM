@@ -6,6 +6,7 @@
 
 
 # Cambios implementados en la práctica 4
+<br />
 
 
 1. Implementar un método en la clase Pedido para generar un idPedido aleatorio entre 0 y 100000
