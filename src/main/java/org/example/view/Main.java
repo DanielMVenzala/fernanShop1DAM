@@ -53,7 +53,7 @@ public class Main {
                               ⠀⠀⠀⠀⠀⠈⠑⠒⠤⣀⠀⠀⠀⠀⠀⣀⡤⠼⠒⠊⠉⠀⠀⠀⠀⠀
                               ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠓⠶⠚⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                               
                                       
-                    ¿Quién eres
+                    ¿Quién eres?
                     =====================                                                                      
                     1. Soy cliente
                     2. Soy trabajador
