@@ -34,7 +34,7 @@ public class Comunicaciones {
 
     public static void enviarCorreoGmail(String destinatario, String asunto, String cuerpo) {
         String remitente = "fernando3prueba@gmail.com";
-        String clave = "lpmz ghqt dsfsf uccs";
+        String clave = "owca qmaq ihnz uakl";
 
         // Propiedades de la conexión
         Properties props = System.getProperties();
