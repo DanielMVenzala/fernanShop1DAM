@@ -53,8 +53,8 @@ public class Trabajador {
         resultado += "Correo electrónico: " + correo + "\n";
         resultado += "Clave: " + clave + "\n";
         resultado += "Pedidos:\n";
-        resultado += "\t" + ((pedido1 != null) ? pedido1.pintaPedido() : "Pedido vacío\n");
-        resultado += "\t" + ((pedido2 != null) ? pedido2.pintaPedido() : "Pedido vacío\n");
+        resultado += "\t" + ((pedido1 != null) ? pedido1.pintaPedido() : "");
+        resultado += "\t" + ((pedido2 != null) ? pedido2.pintaPedido() : "");
         resultado += "===========================================\n";
 
         return resultado;

@@ -299,8 +299,13 @@ public class Main {
 
             // Preguntar si el cliente desea añadir más productos, excepto en el último ciclo
             if (i < 3) {
-                System.out.println("¿Quieres añadir más productos al carrito? (si/no)");
-                String quieresMas = sc.nextLine();
+                String quieresMas = "";
+                do {
+                    System.out.println("¿Quieres añadir más productos al carrito? (si/no)");
+                    quieresMas = sc.nextLine();
+                    if (!(quieresMas.equals("si") || quieresMas.equals("no"))) System.out.println("Introduce una opción válida.");
+                } while (!(quieresMas.equals("si") || quieresMas.equals("no")));
+
                 if (quieresMas.equalsIgnoreCase("no")) i = 3;
             }
         }
@@ -366,8 +371,8 @@ public class Main {
             else trabajadorAsignado.setPedido2(pedido);
 
             pedido.setEstado("En preparación");
-            System.out.println("Pedido asignado al repartidor/a " + trabajadorAsignado.getNombre());
-            enviaMensajeTelegram("Tienes un nuevo pedido asignado: " + pedido.getIdPedido() + ". Revisa tu correo electrónico");
+            System.out.println("Pronto recibirás tu pedido de la mano de nuestro conductor/a " + trabajadorAsignado.getNombre());
+            enviaMensajeTelegram(trabajadorAsignado.getNombre() + ", tienes un nuevo pedido asignado: " + pedido.getIdPedido() + ". Revisa tu correo electrónico");
         } else {
             System.out.println("No hay trabajadores disponibles para asignar el pedido.");
         }

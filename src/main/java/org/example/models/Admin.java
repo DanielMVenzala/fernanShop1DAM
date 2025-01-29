@@ -388,9 +388,9 @@ public class Admin {
     // Método que le muestra los datos de los trabajadores al admin
     public String verTrabajadoresAdmin() {
         String resultado = "";
-        resultado += (trabajador1.getNombre().isEmpty()) ? "" : trabajador1.pintaTrabajador();
-        resultado += (trabajador2.getNombre().isEmpty()) ? "" : trabajador2.pintaTrabajador();
-        resultado += (trabajador3.getNombre().isEmpty()) ? "" : trabajador3.pintaTrabajador();
+        resultado += (trabajador1 != null ? trabajador1.pintaTrabajador() : "");
+        resultado += (trabajador2 != null ? trabajador2.pintaTrabajador() : "");
+        resultado += (trabajador3 != null ? trabajador3.pintaTrabajador() : "");
 
         return resultado;
     }
