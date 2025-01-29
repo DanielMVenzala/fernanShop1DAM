@@ -38,6 +38,13 @@
 ![App Screenshot](https://i.postimg.cc/4xmSxRvs/image.png)
 ![App Screenshot](https://i.postimg.cc/9Xb8PQJc/image.png)
 
+<br />
+<br />
+
+5. Implementar el control de excepciones en la aplicación. En la captura se ve un ejemplo de una NumberFormatException implementada en uno de los menús. Se irá actualizando toda la aplicación progresivamente para implementar excepciones donde sea necesario.
+
+![App Screenshot](https://i.postimg.cc/C5CsKm5G/image.png)
+
 
 
 
