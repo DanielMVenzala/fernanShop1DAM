@@ -81,8 +81,6 @@ public class Main {
                 case 4:
                     System.out.println("¡Hasta pronto!");
                     break;
-                default:
-                    break;
             }
         } while (op != 4);
     }
@@ -93,7 +91,8 @@ public class Main {
     public static void gestionCliente(Scanner sc) throws NumberFormatException{
         int op = 0;
 
-        System.out.print("""
+        do {
+            System.out.print("""
             \n¿Qué quieres hacer?
             1. Iniciar sesión
             2. Darte de alta
@@ -101,24 +100,28 @@ public class Main {
             Selecciona una opción:
             """);
 
-        try {
-            op = Integer.parseInt(sc.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("Introduce una opción correcta.");
-        }
+            try {
+                op = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Debes introducir un número.");
+                return;
+            }
 
-        switch (op) {
-            case 1 :
-                iniciarSesionCliente(sc);
-                break;
-            case 2:
-                registrarNuevoCliente(sc);
-                pulsaParaContinuar();
-                limpiaPantalla();
-                break;
-            case 3:
-                break;
-        }
+            switch (op) {
+                case 1 :
+                    iniciarSesionCliente(sc);
+                    break;
+                case 2:
+                    registrarNuevoCliente(sc);
+                    pulsaParaContinuar();
+                    limpiaPantalla();
+                    break;
+                case 3:
+                    break;
+                default:
+                    System.out.println("Opción no válida, vuelve a intentarlo.");
+            }
+        } while (op != 3);
     }
 
     // Método para el inicio de sesión del cliente
@@ -521,7 +524,7 @@ public class Main {
                     limpiaPantalla();
                     break;
                 case 5:
-                    cliente.modificaDatosCliente(sc);
+                    modificaDatosCliente(sc, cliente);
                     break;
                 case 6:
                     System.out.println("Cerrando sesión...");
@@ -535,6 +538,120 @@ public class Main {
                     break;
             }
         } while (op != 6);
+    }
+
+    // Método para modificar alguno de los atributos del cliente, con un switch
+    public static void modificaDatosCliente(Scanner sc, Cliente cliente) throws NumberFormatException {
+        int op = 0;
+        do {
+            System.out.print("""
+                            ¿Qué dato quieres cambiar?
+                            1. Nombre
+                            2. Apellidos
+                            3. Dirección
+                            4. Localidad
+                            5. Provincia
+                            6. Teléfono
+                            7. Correo electrónico
+                            8. Clave
+                            9. Volver
+                            Introduce una opción: 
+                            """);
+
+            try {
+                op = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Introduzca una opción correcta.");
+            }
+
+            switch (op) {
+                case 1:
+                    System.out.print("Introduce el nuevo valor: ");
+                    String nuevoNombre = sc.nextLine();
+                    cliente.setNombre(nuevoNombre);
+                    System.out.println("Nombre cambiado correctamente.");
+                    pulsaParaContinuar();
+                    limpiaPantalla();
+                    break;
+
+                case 2:
+                    System.out.print("Introduce el nuevo valor: ");
+                    String nuevoApellido = sc.nextLine();
+                    cliente.setApellidos(nuevoApellido);
+                    System.out.println("Apellidos cambiados correctamente.");
+                    pulsaParaContinuar();
+                    limpiaPantalla();
+                    break;
+                case 3:
+                    System.out.print("Introduce el nuevo valor: ");
+                    String nuevaDireccion = sc.nextLine();
+                    cliente.setDireccion(nuevaDireccion);
+                    System.out.println("Dirección cambiada correctamente.");
+                    pulsaParaContinuar();
+                    limpiaPantalla();
+                    break;
+                case 4:
+                    System.out.print("Introduce el nuevo valor: ");
+                    String nuevaLocalidad = sc.nextLine();
+                    cliente.setLocalidad(nuevaLocalidad);
+                    System.out.println("Localidad cambiada correctamente.");
+                    pulsaParaContinuar();
+                    limpiaPantalla();
+                    break;
+                case 5:
+                    System.out.print("Introduce el nuevo valor: ");
+                    String nuevaProvincia = sc.nextLine();
+                    cliente.setProvincia(nuevaProvincia);
+                    System.out.println("Provincia cambiada correctamente.");
+                    pulsaParaContinuar();
+                    limpiaPantalla();
+                    break;
+                case 6:
+                    System.out.print("Introduce el nuevo valor: ");
+                    int nuevoTelefono = Integer.parseInt(sc.nextLine());
+                    cliente.setTelefono(nuevoTelefono);
+                    System.out.println("Teléfono cambiado correctamente.");
+                    pulsaParaContinuar();
+                    limpiaPantalla();
+                    break;
+                case 7:
+                    String nuevoCorreo = "";
+                    do {
+                        System.out.print("Introduce el nuevo valor: ");
+                        nuevoCorreo = sc.nextLine();
+                        if (nuevoCorreo.equals(cliente2.getCorreo())) System.out.println("Ese correo ya está en uso, elige otro.");
+                    } while (nuevoCorreo.equals(cliente2.getCorreo()));
+                    cliente.setCorreo(nuevoCorreo);
+                    int token = cliente.generaToken();
+                    int tokenUsuario;
+                    System.out.println("Un momento por favor...");
+                    enviaTokenMailCliente(token, nuevoCorreo, cliente.getNombre());
+                    do {
+                        System.out.println("Introduce el token que has recibido al nuevo mail para continuar:");
+                        tokenUsuario = Integer.parseInt(sc.nextLine());
+
+                        if (tokenUsuario != token) System.out.println("Token incorrecto.");
+                    } while (tokenUsuario != token);
+
+                    System.out.println("Correo cambiado correctamente.");
+                    pulsaParaContinuar();
+                    limpiaPantalla();
+                    break;
+                case 8:
+                    System.out.print("Introduce el nuevo valor: ");
+                    String nuevaClave = sc.nextLine();
+                    cliente.setClave(nuevaClave);
+                    System.out.println("Clave cambiada correctamente.");
+                    pulsaParaContinuar();
+                    limpiaPantalla();
+                    break;
+                case 9:
+                    break;
+                default:
+                    System.out.println("Opción incorrecta...");
+            }
+        } while (op != 9);
+        System.out.println();
     }
 
     public static void menuTrabajador(Scanner sc, Trabajador trabajador) throws  NumberFormatException{
