@@ -36,7 +36,7 @@
 
 
 ![App Screenshot](https://i.postimg.cc/4xmSxRvs/image.png)
-![App Screenshot](https://i.postimg.cc/9Xb8PQJc/image.png)
+![App Screenshot](http://imgfz.com/i/SYeujIx.jpeg)
 
 <br />
 <br />
