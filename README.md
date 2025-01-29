@@ -35,6 +35,8 @@
 4. Para la creación de un nuevo cliente así como para la modificación de su correo electrónico implementamos un método que enviará un token al mail del cliente y que tendrá que introducir para poder completar el registro. Dentro del método llamaremos a enviarCorreoGmail, donde se establecen las propiedades de la conexión (remitente, clave, puerto, host...)
 
 
+![App Screenshot](https://i.postimg.cc/4xmSxRvs/image.png)
+
 
 
 
