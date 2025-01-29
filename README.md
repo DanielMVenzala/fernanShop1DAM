@@ -51,7 +51,7 @@
 6. Se implementa el método mandaMailTrabajador, al cual se le pasa por parámetros un pedido y un trabajador. Se construye el cuerpo del mail con los datos del pedido y se llama al método enviarCorreoGmail, mencionado en capturas anteriores.
 
 
-![App Screenshot](https://i.postimg.cc/RZkS4B6n/image.png)
+![App Screenshot](http://imgfz.com/i/EIdnS4t.jpeg)
 
 <br />
 <br />
