@@ -33,7 +33,7 @@ public class Comunicaciones {
     }
 
     public static void enviarCorreoGmail(String destinatario, String asunto, String cuerpo) {
-        String remitente = "danymatav@gmail.com";
+        String remitente = "fernando3prueba@gmail.com";
         String clave = "lpmz ghqt uvms uccs";
 
         // Propiedades de la conexión

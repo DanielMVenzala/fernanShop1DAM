@@ -11,8 +11,8 @@ import static org.example.utils.Utils.*;
 public class Main {
     // Se declaran las instancias estáticas para poder trabajar con ellas en el main
     static Cliente cliente1 = new Cliente("Juan", "Lafuente", "Calle 1", "Martos", "Jaén", 655874511, "cliente1fernanshop@gmail.com", "jlf123");
-//    static Cliente cliente2 = new Cliente("Pedro", "Conde", "Calle 144", "Jaén", "Jaén", 655441122, "cliente2fernanshop@gmail.com", "pecon467");
-    static Cliente cliente2 = null;
+    static Cliente cliente2 = new Cliente("Pedro", "Conde", "Calle 144", "Jaén", "Jaén", 655441122, "cliente2fernanshop@gmail.com", "pecon467");
+//    static Cliente cliente2 = null;
 
     static Trabajador trabajador1 = new Trabajador("Andrés", "González", "trabajador1fernanshop@gmail.com", "andgon58745");
     static Trabajador trabajador2 = new Trabajador("Ana", "Martínez", "cliente1fernanshop@gmail.com", "anamar645");
@@ -80,6 +80,8 @@ public class Main {
                     break;
                 case 4:
                     System.out.println("¡Hasta pronto!");
+                    break;
+                default:
                     break;
             }
         } while (op != 4);
@@ -222,6 +224,7 @@ public class Main {
 
     }
 
+
     public static void enviaTokenMailCliente(int token, String correo, String nombreCliente) {
 
         String destinatario = correo;
@@ -344,16 +347,16 @@ public class Main {
             if (trabajador1.cuentaPedidos() <= trabajador2.cuentaPedidos() && trabajador1.cuentaPedidos() <= trabajador3.cuentaPedidos()) {
                 trabajadorAsignado = trabajador1;
                 System.out.println("Un momento por favor...");
-                mandaMailTrabajador(pedido, trabajadorAsignado, trabajadorAsignado.getCorreo());
+                mandaMailTrabajador(pedido, trabajadorAsignado);
 
             } else if (trabajador2.cuentaPedidos() <= trabajador1.cuentaPedidos() && trabajador2.cuentaPedidos() <= trabajador3.cuentaPedidos()) {
                 trabajadorAsignado = trabajador2;
                 System.out.println("Un momento por favor...");
-                mandaMailTrabajador(pedido, trabajadorAsignado, trabajadorAsignado.getCorreo());
+                mandaMailTrabajador(pedido, trabajadorAsignado);
             } else {
                 trabajadorAsignado = trabajador3;
                 System.out.println("Un momento por favor...");
-                mandaMailTrabajador(pedido, trabajadorAsignado, trabajadorAsignado.getCorreo());
+                mandaMailTrabajador(pedido, trabajadorAsignado);
             }
 
             if (trabajadorAsignado.getPedido1() == null) trabajadorAsignado.setPedido1(pedido);
@@ -401,8 +404,8 @@ public class Main {
 
 
 
-    public static void mandaMailTrabajador(Pedido pedido, Trabajador trabajador, String correo) {
-        String destinatario = correo;
+    public static void mandaMailTrabajador(Pedido pedido, Trabajador trabajador) {
+        String destinatario = trabajador.getCorreo();
         String asunto = "CONFIRMACIÓN DE PEDIDO " + pedido.getIdPedido() + " PARA " + trabajador.getNombre();
 
         String resultado = "";
@@ -424,9 +427,6 @@ public class Main {
                 "<br><b>Total pedido: </b>" + pedido.getTotalPedido() + "€" +
                 "<br><br><h2>==================================</h2>";
 
-        /*
-        <a href="https://imgbb.com/"><img src="https://i.ibb.co/TvhJwrB/Captura-de-pantalla-2025-01-16-105520.jpg" alt="Captura-de-pantalla-2025-01-16-105520" border="0"></a>
-         */
 
         String cuerpo = "<img src='https://i.postimg.cc/C1yV7PDS/Captura-de-pantalla-2025-01-16-105520.jpg' alt='Logo' />";
         cuerpo += "<br><h2> DESGLOSE DE PEDIDO </h2>";
@@ -537,9 +537,9 @@ public class Main {
         } while (op != 6);
     }
 
-    public static void menuTrabajador(Scanner sc, Trabajador trabajador) {
+    public static void menuTrabajador(Scanner sc, Trabajador trabajador) throws  NumberFormatException{
         Admin admin = new Admin();
-        int op;
+        int op = 0;
         do {
             System.out.printf("""
                 FERNANSHOP
@@ -553,7 +553,13 @@ public class Main {
                 7. Cerrar sesión
                 Selecciona una opción:
                 """, trabajador.getNombre(), trabajador.cuentaPedidos());
-            op = Integer.parseInt(sc.nextLine());
+
+            try {
+                op = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Opción incorrecta.");
+            }
+
 
             switch (op) {
                 case 1:

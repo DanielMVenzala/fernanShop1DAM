@@ -82,8 +82,8 @@ public class Cliente {
     }
 
     // Método para modificar alguno de los atributos del cliente, con un switch
-    public void modificaDatosCliente(Scanner sc) {
-        int op;
+    public void modificaDatosCliente(Scanner sc) throws NumberFormatException {
+        int op = 0;
         do {
             System.out.print("""
                             ¿Qué dato quieres cambiar?
@@ -98,7 +98,13 @@ public class Cliente {
                             9. Volver
                             Introduce una opción: 
                             """);
-            op = Integer.parseInt(sc.nextLine());
+
+            try {
+                op = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Introduzca una opción correcta.");
+            }
+
             switch (op) {
                 case 1:
                     System.out.print("Introduce el nuevo valor: ");
