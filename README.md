@@ -35,7 +35,31 @@
 4. Para la creación de un nuevo cliente así como para la modificación de su correo electrónico implementamos un método que enviará un token al mail del cliente y que tendrá que introducir para poder completar el registro. Dentro del método llamaremos a enviarCorreoGmail, donde se establecen las propiedades de la conexión (remitente, clave, puerto, host...)
 
 
+![App Screenshot](https://i.postimg.cc/4xmSxRvs/image.png)
+![App Screenshot](https://i.postimg.cc/9Xb8PQJc/image.png)
 
+<br />
+<br />
+
+5. Implementar el control de excepciones en la aplicación. En la captura se ve un ejemplo de una NumberFormatException implementada en uno de los menús. Se irá actualizando toda la aplicación progresivamente para implementar excepciones donde sea necesario.
+
+![App Screenshot](https://i.postimg.cc/C5CsKm5G/image.png)
+
+<br />
+<br />
+
+6. Se implementa el método mandaMailTrabajador, al cual se le pasa por parámetros un pedido y un trabajador. Se construye el cuerpo del mail con los datos del pedido y se llama al método enviarCorreoGmail, mencionado en capturas anteriores.
+
+
+![App Screenshot](http://imgfz.com/i/yuTVMmI.jpeg)
+
+<br />
+<br />
+
+7. También se le mandará una notificación al trabajador vía Telegram en la que se le informe de la asignación de un nuevo pedido.
+
+![App Screenshot](https://i.postimg.cc/59LkRM1R/image.png)
+![App Screenshot](https://i.postimg.cc/9fDLP6J1/image.png)
 
 
 
