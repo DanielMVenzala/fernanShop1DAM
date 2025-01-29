@@ -53,7 +53,13 @@
 
 ![App Screenshot](https://i.postimg.cc/RZkS4B6n/image.png)
 
+<br />
+<br />
 
+7. También se le mandará una notificación al trabajador vía Telegram en la que se le informe de la asignación de un nuevo pedido.
+
+![App Screenshot](https://i.postimg.cc/59LkRM1R/image.png)
+![App Screenshot](https://i.postimg.cc/9fDLP6J1/image.png)
 
 
 
